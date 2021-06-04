@@ -1,38 +1,144 @@
-.App {
-  text-align: center;
+:root {
+  --primary-color: #0078f2;
+  --background-color: #131313;
+  --text-color: #fff;
+  --max-width: 50vh;
+
+  --player-x-color: #6a49f4;
+  --player-o-color: #ff474d;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  line-height: 1;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.flex-center {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+header,
+footer,
+.grid-container {
+  max-width: var(--max-width);
+  margin: auto;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 0 12px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  text-align: center;
+}
+.brand img.logo {
+  max-width: 120px;
+  filter: invert();
+}
+.brand img.sep {
+  max-width: 80px;
+  margin: 12px 0 8px;
+}
+.brand span {
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.scoreboard {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin: 32px 0 8px;
+  font-weight: bold;
+}
+.scoreboard__score {
+  margin: 0 auto;
+  padding: 10px 18px;
+  background: var(--primary-color);
+  box-shadow: 0 1px 12px rgb(0 0 0 / 10%);
+  border-radius: 20px;
+}
+.scoreboard__score span:first-child {
+  padding-right: 8px;
+}
+.scoreboard__score span:nth-child(2) {
+  position: relative;
+  top: -1px;
+}
+.scoreboard__score span:last-child {
+  padding-left: 8px;
+}
+
+.grid-container {
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  grid-gap: 2px;
+  background-color: var(--text-color);
+}
+
+.grid__cell {
+  position: relative;
+  box-sizing: border-box;
+  background-color: var(--background-color);
+  cursor: pointer;
+}
+
+.grid__cell::before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+
+.grid__cell .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100%;
+  width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+svg#close path.fill {
+  fill: var(--player-x-color);
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+svg#circle path.fill {
+  fill: var(--player-o-color);
+}
+.grid__cell svg {
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.grid__cell[data-player="O"] svg#circle {
+  width: 85%;
+  height: 85%;
+}
+.grid__cell[data-player="X"] svg#close,
+.grid__cell[data-player="O"] svg#circle {
+  display: block;
+}
+footer {
+  margin-top: 32px;
+  font-size: 40px;
+  font-weight: bold;
 }
