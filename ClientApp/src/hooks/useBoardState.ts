@@ -45,9 +45,7 @@ export const useBoardState = (): IUseBoardState => {
       }));
 
       startNewGame();
-    }
-
-    if (boardState.isDraw) {
+    } else if (boardState.isDraw) {
       alert('DRAW! - There are no moves left on the board.');
       startNewGame();
     }
